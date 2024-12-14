@@ -7,15 +7,12 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parents[1]))
 
 # Import QueryBase, Employee, Team from employee_events
-#### YOUR CODE HERE
 from employee_events.query_base import QueryBase
 from employee_events.employee import Employee
 from employee_events.team import Team
 
-print("Employee Events Package Imported Successfully!")
 
 # import the load_model function from the utils.py file
-#### YOUR CODE HERE
 from report.utils import load_model
 
 """
@@ -35,7 +32,6 @@ from combined_components import FormGroup, CombinedComponent
 
 # Create a subclass of base_components/dropdown
 # called `ReportDropdown`
-#### YOUR CODE HERE
 class ReportDropdown(Dropdown):
     
     # Overwrite the build_component method
@@ -123,10 +119,10 @@ class LineChart(MatplotlibViz):
         # pass the axis variable
         # to the `.set_axis_styling`
         # method
-        self.set_axis_styling(ax)
+        self.set_axis_styling(ax, bordercolor="black", fontcolor="black")
         
         # Set title and labels for x and y axis
-        ax.set_title("Cumulative Event Counts")
+        ax.set_title("Cumulative Event Counts",fontsize=11, pad=15 )
         ax.set_xlabel("Date")
         ax.set_ylabel("Count")
         return fig
@@ -171,8 +167,6 @@ class BarChart(MatplotlibViz):
         # Otherwise set `pred` to the first value
         # of the predict_proba output
             pred = probabilities[0]
-        print("THe preeeeeeeeeeeeeeeeeeeeeeeeeeed")
-        print(pred)
         # Applying a color scale so as to stand out
         if pred < 0.33:
             color = "green"  # Low risk
@@ -192,7 +186,7 @@ class BarChart(MatplotlibViz):
         # pass the axis variable
         # to the `.set_axis_styling`
         # method
-        self.set_axis_styling(ax)
+        self.set_axis_styling(ax ,bordercolor="black", fontcolor="black")
         return fig
  
 # Create a subclass of combined_components/CombinedComponent
@@ -249,13 +243,37 @@ class Report(CombinedComponent):
     # containing initialized instances 
     # of the header, dashboard filters,
     # data visualizations, and notes table
-    #### YOUR CODE HERE
+    # children = [
+    #     Header(),
+    #     DashboardFilters(),
+    #     Visualizations(),
+    #     NotesTable(),
+    # ]
     children = [
         Header(),
         DashboardFilters(),
-        Visualizations(),
-        NotesTable(),
+        NotesTable(),  # Always include NotesTable
     ]
+
+    def __call__(self, entity_id, model):
+        self.userId = entity_id
+        self.model = model
+
+        # Dynamically modify children based on conditions
+        dynamic_children = [
+            Header(),
+            DashboardFilters(),
+            NotesTable(),
+        ]
+
+        # Add Visualizations only if `entity_id` and `model` are defined. This is to fix the index route, as if we passed them even when self.userid never had a vaue, error would be generated
+        if self.userId and self.model:
+            dynamic_children.insert(2, Visualizations())  # Insert before NotesTable
+
+        self.children = dynamic_children
+
+        # Call the parent class's __call__ method with the updated children
+        return super().__call__(entity_id, model)
 
 # Initialize a fasthtml app 
 app = FastHTML()

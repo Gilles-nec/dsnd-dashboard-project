@@ -1,34 +1,31 @@
 # Import any dependencies needed to execute sql queries
-# YOUR CODE HERE
 import pandas as pd
 from sqlite3 import connect
 from .sql_execution import QueryMixin
 
 # Define a class called QueryBase
 # that has no parent class
-# YOUR CODE HERE
 class QueryBase(QueryMixin):
 
     # Create a class attribute called `name`
     # set the attribute to an empty string
-    # YOUR CODE HERE
     name = ""
 
     # Define a `names` method that receives
     # no passed arguments
-    # YOUR CODE HERE
     def names(self):
         # Return an empty list
-        # YOUR CODE HERE
         return []
 
 
     # Define an `event_counts` method
     # that receives an `id` argument
     # This method should return a pandas dataframe
-    # YOUR CODE HERE
     def event_counts(self, id):
-
+        if id is None:
+        #TO handle cases where the id is not defined
+        # Return an empty DataFrame or appropriate response
+            return pd.DataFrame(columns=["event_date", "total_positive_events", "total_negative_events"])
         # QUERY 1
         # Write an SQL query that groups by `event_date`
         # and sums the number of positive and negative events
@@ -37,7 +34,6 @@ class QueryBase(QueryMixin):
         # Use f-string formatting to set the name
         # of id columns used for joining
         # order by the event_date column
-        # YOUR CODE HERE
         query = f"""
             SELECT 
                 event_date, 
@@ -56,7 +52,6 @@ class QueryBase(QueryMixin):
 
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
-    # YOUR CODE HERE
     def notes(self, id):
 
         # QUERY 2
@@ -66,7 +61,6 @@ class QueryBase(QueryMixin):
         # with f-string formatting
         # so the query returns the notes
         # for the table name in the `name` class attribute
-        # YOUR CODE HERE
         query = f"""
             SELECT 
                 note_date, 

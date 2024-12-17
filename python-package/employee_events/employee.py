@@ -5,6 +5,7 @@ from .query_base import QueryBase
 # from the `sql_execution` module
 from .sql_execution import QueryMixin
 
+
 # Define a subclass of QueryBase
 # called Employee
 class Employee(QueryBase, QueryMixin):
@@ -13,7 +14,6 @@ class Employee(QueryBase, QueryMixin):
     # to the string "employee"
     name = "employee"
 
-
     # Define a method called `names`
     # that receives no arguments
     # This method should return a list of tuples
@@ -21,19 +21,18 @@ class Employee(QueryBase, QueryMixin):
     def names(self):
         # Query 3
         # Write an SQL query
-        # that selects two columns 
+        # that selects two columns
         # 1. The employee's full name
         # 2. The employee's id
         # This query should return the data
         # for all employees in the database
         query = """
-            SELECT 
+            SELECT
                 (first_name || ' ' || last_name) AS full_name,
                 employee_id
             FROM employee
         """
         return self.query(query)
-    
 
     # Define a method called `username`
     # that receives an `id` argument
@@ -47,13 +46,12 @@ class Employee(QueryBase, QueryMixin):
         # to only return the full name of the employee
         # with an id equal to the id argument
         query = f"""
-            SELECT 
+            SELECT
                 (first_name || ' ' || last_name) AS full_name
             FROM employee
             WHERE employee_id = {id}
         """
         return self.query(query)
-
 
     # Below is method with an SQL query
     # This SQL query generates the data needed for
@@ -66,7 +64,7 @@ class Employee(QueryBase, QueryMixin):
         if not id:
             raise ValueError("The ID provided is None or invalid.")
         query = f"""
-            SELECT 
+            SELECT
                 SUM(positive_events) AS positive_events,
                 SUM(negative_events) AS negative_events
             FROM {self.name}

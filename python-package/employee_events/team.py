@@ -4,6 +4,7 @@ from .query_base import QueryBase
 # Import dependencies for sql execution
 from .sql_execution import QueryMixin
 
+
 # Create a subclass of QueryBase
 # called  `Team`
 class Team(QueryBase, QueryMixin):
@@ -11,7 +12,6 @@ class Team(QueryBase, QueryMixin):
     # Set the class attribute `name`
     # to the string "team"
     name = "team"
-
 
     # Define a `names` method
     # that receives no arguments
@@ -24,13 +24,12 @@ class Team(QueryBase, QueryMixin):
         # from the team table for all teams
         # in the database
         query = """
-            SELECT 
-                team_name, 
+            SELECT
+                team_name,
                 team_id
             FROM team
         """
         return self.query(query)
-    
 
     # Define a `username` method
     # that receives an ID argument
@@ -44,13 +43,12 @@ class Team(QueryBase, QueryMixin):
         # to only return the team name related to
         # the ID argument
         query = f"""
-            SELECT 
+            SELECT
                 team_name
             FROM team
             WHERE team_id = {id}
         """
         return self.query(query)
-
 
     # Below is method with an SQL query
     # This SQL query generates the data needed for
@@ -61,9 +59,9 @@ class Team(QueryBase, QueryMixin):
     # the sql query
     def model_data(self, id):
         query = f"""
-            SELECT positive_events, negative_events 
+            SELECT positive_events, negative_events
             FROM (
-                SELECT 
+                SELECT
                     employee_id,
                     SUM(positive_events) AS positive_events,
                     SUM(negative_events) AS negative_events

@@ -1,7 +1,7 @@
 # Import any dependencies needed to execute sql queries
 import pandas as pd
-from sqlite3 import connect
 from .sql_execution import QueryMixin
+
 
 # Define a class called QueryBase
 # that has no parent class
@@ -17,15 +17,16 @@ class QueryBase(QueryMixin):
         # Return an empty list
         return []
 
-
     # Define an `event_counts` method
     # that receives an `id` argument
     # This method should return a pandas dataframe
     def event_counts(self, id):
         if id is None:
-        #TO handle cases where the id is not defined
-        # Return an empty DataFrame or appropriate response
-            return pd.DataFrame(columns=["event_date", "total_positive_events", "total_negative_events"])
+            # TO handle cases where the id is not defined
+            # Return an empty DataFrame or appropriate response
+            return pd.DataFrame(columns=[
+                "event_date", "total_positive_events", "total_negative_events"
+            ])
         # QUERY 1
         # Write an SQL query that groups by `event_date`
         # and sums the number of positive and negative events
@@ -35,8 +36,8 @@ class QueryBase(QueryMixin):
         # of id columns used for joining
         # order by the event_date column
         query = f"""
-            SELECT 
-                event_date, 
+            SELECT
+                event_date,
                 SUM(positive_events) AS total_positive_events,
                 SUM(negative_events) AS total_negative_events
             FROM {self.name}
@@ -47,8 +48,6 @@ class QueryBase(QueryMixin):
             ORDER BY event_date
         """
         return self.pandas_query(query)
-            
-    
 
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
@@ -62,8 +61,8 @@ class QueryBase(QueryMixin):
         # so the query returns the notes
         # for the table name in the `name` class attribute
         query = f"""
-            SELECT 
-                note_date, 
+            SELECT
+                note_date,
                 note
             FROM notes
             JOIN {self.name}
@@ -72,4 +71,3 @@ class QueryBase(QueryMixin):
             ORDER BY note_date
         """
         return self.pandas_query(query)
-

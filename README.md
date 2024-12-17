@@ -142,27 +142,27 @@ Ensure you have the following installed:
 
 ### 2. Installation Steps
 
-1. **Clone the Repository**:
+a. **Clone the Repository**:
 
    ```bash
    git clone <repo-url>
    cd dsnd-dashboard-project
    ```
 
-2. **Set Up a Virtual Environment**:
+b. **Set Up a Virtual Environment**:
 
    ```bash
    python -m venv env
    source env/bin/activate  # On Windows: env\Scripts\activate
    ```
 
-3. **Install Dependencies**:
+c. **Install Dependencies**:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Build and Install the Python Package**:
+d. **Build and Install the Python Package**:
 
    ```bash
    cd python-package
@@ -170,35 +170,35 @@ Ensure you have the following installed:
    pip install dist/employee_events-0.1.tar.gz
    ```
 
-5. **Start the Dashboard**:
+e. **Start the Dashboard**:
 
    ```bash
    python report/dashboard.py
    ```
 
-6. **Access the Dashboard**:
+f. **Access the Dashboard**:
    Open your browser and navigate to:
    ```
-   http://127.0.0.1:8000/
+   http://127.0.0.1:5001/
    ```
 
-## Usage Instructions
+## 3. Usage Instructions
 
-1. **Default View**: The dashboard will display dropdown filters to select an employee or team.
-2. **Employee Mode**:
-   - Select "Employee" and choose an employee from the dropdown.
+a. **Default View**: The dashboard will display dropdown filters to select an employee or team.
+b. **Employee Mode**:
+- Select "Employee" and choose an employee from the dropdown.
    - View:
      - Cumulative line chart for positive and negative events.
      - Bar chart predicting recruitment risk.
      - Notes table listing event logs.
-3. **Team Mode**:
+c. **Team Mode**:
    - Select "Team" and choose a team from the dropdown.
    - View:
      - Cumulative line chart for team-level events.
      - Bar chart predicting recruitment risk.
      - Notes table listing team event logs.
 
-## Key Components
+## 4. Key Components
 
 ### 1. Python Package
 
@@ -222,7 +222,7 @@ Ensure you have the following installed:
 | `/update_dropdown`  | Updates the dropdown dynamically   |
 | `/update_data`      | Submits the selected filter values |
 
-## Testing
+## 5. Testing
 
 Run tests using **pytest**:
 
@@ -230,36 +230,27 @@ Run tests using **pytest**:
 pytest tests/test_employee_events.py
 ```
 
-### Tests Include
+### 6. Tests Include
 
 - Verifying database file existence
 - Checking table presence (employee, team, employee_events)
 
-## Suggestions to Stand Out
+## 7. Suggestions to Stand Out
 
 - **Color Scale**: The bar chart applies a color scale (green, yellow, red) based on predicted recruitment risk.
 - **Dynamic Title**: Dashboard title updates based on filter settings ("Employee Performance" or "Team Performance").
 
-## Screenshots
 
-### Employee View
-
-![Employee Dashboard](assets/employee_view.png)
-
-### Team View
-
-![Team Dashboard](assets/team_view.png)
-
-## Contributing
+## 8. Contributing
 
 If you wish to contribute:
 
-1. Fork this repository
-2. Create a new branch
-3. Commit your changes
-4. Submit a pull request
+a. Fork this repository
+b. Create a new branch
+c. Commit your changes
+d. Submit a pull request
 
-## License
+## 9. License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 

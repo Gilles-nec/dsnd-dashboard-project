@@ -29,9 +29,10 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pytest
         cd ./python-package
+        pip install ./python-package/dist/*.tar.gz
         python setup.py sdist
         cd ..
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
-        pytest
+        pytest tests/

@@ -2,12 +2,12 @@
 from .query_base import QueryBase
 
 # Import dependencies for sql execution
-from .sql_execution import QueryMixin
+# from .sql_execution import QueryMixin
 
 
 # Create a subclass of QueryBase
 # called  `Team`
-class Team(QueryBase, QueryMixin):
+class Team(QueryBase):
 
     # Set the class attribute `name`
     # to the string "team"

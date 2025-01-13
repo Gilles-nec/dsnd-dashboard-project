@@ -3,12 +3,12 @@ from .query_base import QueryBase
 
 # Import dependencies needed for sql execution
 # from the `sql_execution` module
-from .sql_execution import QueryMixin
+# from .sql_execution import QueryMixin
 
 
 # Define a subclass of QueryBase
 # called Employee
-class Employee(QueryBase, QueryMixin):
+class Employee(QueryBase):
 
     # Set the class attribute `name`
     # to the string "employee"
